@@ -1,98 +1,142 @@
 ---
+const mainBg = "/images/screenshots/screen3.png";
 
-const screenshots = [
-  { src: "/images/screenshots/screen1.png", alt: "Zeal 首页" },
-  { src: "/images/screenshots/screen2.png", alt: "问题拆解" },
-  { src: "/images/screenshots/screen3.png", alt: "对话交互" },
-  { src: "/images/screenshots/screen4.png", alt: "模板引擎" },
-  { src: "/images/screenshots/screen5.png", alt: "个性化记忆" },
-  { src: "/images/screenshots/screen6.png", alt: "模型推荐" },
-  { src: "/images/screenshots/screen7.png", alt: "结果展示" },
+const items = [
+  {
+    src: "/images/screenshots/screen1.png",
+    title: "OCR 智能识别",
+    subtitle: "拍照即解析，图片中的文字瞬间转化为可编辑的 Markdown 内容",
+  },
+  {
+    src: "/images/screenshots/screen2.png",
+    title: "智能拆解",
+    subtitle: "复杂问题逐层分解，交互式对话明确需求，让每一步都清晰可控",
+  },
+  {
+    src: "/images/screenshots/screen3.png",
+    title: "对话交互",
+    subtitle: "通过多轮对话精准理解你的真实需求，告别模糊提问",
+  },
+  {
+    src: "/images/screenshots/screen4.png",
+    title: "模板匹配",
+    subtitle: "海量场景模板智能推荐，生成结构清晰、AI 易读的高效提示词",
+  },
+  {
+    src: "/images/screenshots/screen5.png",
+    title: "个性化优化",
+    subtitle: "基于你的使用习惯持续学习，越用越懂你，准确率不断提升",
+  },
+  {
+    src: "/images/screenshots/screen7.png",
+    title: "模型推荐",
+    subtitle: "系统为你匹配最适合的 AI 模型，一键直达最佳答案",
+  },
+  {
+    src: "/images/screenshots/screen6.png",
+    title: "跨平台兼容",
+    subtitle: "生成的提示词可直接复制至任何 AI 平台使用，打破平台壁垒",
+  },
 ];
 ---
 
-<section id="app-showcase" class="relative" style="height: 300vh">
-  <div
-    id="showcase-track"
-    class="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden bg-white"
-  >
-    <div class="text-center mb-8 md:mb-12">
-      <span class="inline-block text-xs font-semibold text-brand-6 tracking-widest uppercase mb-3" style="font-family: var(--font-body)">Explore</span>
+<section id="app-showcase" class="relative">
+  <!-- Fixed semi-transparent background -->
+  <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+    <img
+      src={mainBg}
+      alt=""
+      class="w-full h-full object-cover opacity-[0.08]"
+    />
+  </div>
+
+  <!-- Title -->
+  <div class="min-h-screen flex flex-col items-center justify-center px-6">
+    <div class="text-center scroll-animate">
+      <span class="inline-block text-xs font-semibold text-brand-6 tracking-widest uppercase mb-4" style="font-family: var(--font-body)">Explore</span>
       <h2
-        class="text-3xl md:text-[40px] font-semibold text-text-primary tracking-tight"
+        class="text-4xl md:text-[56px] font-medium text-text-primary tracking-tight mb-5"
         style="font-family: var(--font-display)"
       >
         探索 Zeal
       </h2>
-    </div>
-
-    <div class="w-full overflow-hidden px-6">
-      <div id="showcase-strip" class="flex gap-5 md:gap-8 will-change-transform">
-        {screenshots.map((shot, i) => (
-          <div class="flex-shrink-0 w-[240px] md:w-[280px]">
-            <div
-              class="rounded-2xl overflow-hidden bg-gradient-to-b from-gray-100 to-gray-50"
-              style={`box-shadow: var(--shadow-card-elevation)`}
-            >
-              <img
-                src={shot.src}
-                alt={shot.alt}
-                class="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <div class="flex items-center gap-2 mt-8 md:mt-12">
-      {screenshots.map((_, i) => (
-        <div
-          id={`dot-${i}`}
-          class={`h-[5px] rounded-full transition-all duration-300 ${i === 0 ? 'w-6 bg-brand-6' : 'w-[5px] bg-gray-300'}`}
-        />
-      ))}
+      <p class="text-base md:text-lg text-text-secondary max-w-lg mx-auto" style="font-family: var(--font-body)">
+        从识别到生成，每一步都为你精心设计
+      </p>
     </div>
   </div>
+
+  <!-- Alternating showcase items -->
+  {items.map((item, i) => {
+    const isEven = i % 2 === 0;
+    return (
+      <div class="min-h-screen flex items-center px-6 md:px-12 lg:px-20 py-20">
+        <div class={`w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16 ${isEven ? '' : 'md:flex-row-reverse'}`}>
+
+          <!-- Masked screenshot -->
+          <div class="showcase-image w-full md:w-1/2 flex-shrink-0 opacity-0 translate-y-8" style={`transition: opacity 0.8s ease, transform 0.8s ease; transition-delay: 0.1s; ${isEven ? 'transform: translateX(-40px)' : 'transform: translateX(40px)'};`}>
+            <div class="relative rounded-3xl overflow-hidden aspect-[3/4] md:aspect-[9/12]" style="box-shadow: var(--shadow-brand-glow)">
+              <img
+                src={item.src}
+                alt={item.title}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-br from-brand-6/35 via-brand-02/20 to-brand-6/30 mix-blend-multiply"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/25 to-transparent"></div>
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="showcase-text w-full md:w-1/2 flex-shrink-0 opacity-0 translate-y-8" style={`transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s; ${isEven ? 'transform: translateX(40px)' : 'transform: translateX(-40px)'};`}>
+            <div class={`max-w-md ${isEven ? 'md:text-left' : 'md:text-right md:ml-auto'}`}>
+              <span class="inline-block text-xs font-semibold text-brand-6 tracking-widest uppercase mb-3" style="font-family: var(--font-body)">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3
+                class="text-2xl md:text-4xl font-semibold text-text-primary mb-4 tracking-tight"
+                style="font-family: var(--font-display)"
+              >
+                {item.title}
+              </h3>
+              <p
+                class="text-sm md:text-base text-text-secondary leading-[1.8]"
+                style="font-family: var(--font-body)"
+              >
+                {item.subtitle}
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    );
+  })}
 </section>
 
 <script>
-  const section = document.getElementById("app-showcase");
-  const strip = document.getElementById("showcase-strip");
-  const dots = Array.from(document.querySelectorAll("[id^='dot-']"));
+  function initShowcaseAnimations() {
+    const images = document.querySelectorAll(".showcase-image");
+    const texts = document.querySelectorAll(".showcase-text");
 
-  function updateShowcase() {
-    if (!section || !strip) return;
-
-    const rect = section.getBoundingClientRect();
-    const sectionHeight = section.offsetHeight;
-    const viewportHeight = window.innerHeight;
-    const scrollableDistance = sectionHeight - viewportHeight;
-
-    const scrolled = -rect.top;
-    const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
-
-    const stripWidth = strip.scrollWidth;
-    const containerWidth = strip.parentElement!.offsetWidth;
-    const maxTranslate = stripWidth - containerWidth;
-
-    strip.style.transform = `translateX(${-progress * maxTranslate}px)`;
-
-    const activeIndex = Math.min(
-      dots.length - 1,
-      Math.floor(progress * dots.length)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translate(0, 0)";
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
     );
-    dots.forEach((dot, i) => {
-      if (i === activeIndex) {
-        dot.className = "h-[5px] w-6 rounded-full bg-brand-6 transition-all duration-300";
-      } else {
-        dot.className = "h-[5px] w-[5px] rounded-full bg-gray-300 transition-all duration-300";
-      }
-    });
+
+    images.forEach((el) => observer.observe(el));
+    texts.forEach((el) => observer.observe(el));
   }
 
-  window.addEventListener("scroll", updateShowcase, { passive: true });
-  window.addEventListener("resize", updateShowcase);
-  updateShowcase();
+  initShowcaseAnimations();
+  document.addEventListener("astro:after-swap", initShowcaseAnimations);
 </script>
