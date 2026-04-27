@@ -14,7 +14,9 @@
       "Bash(pkill -f \"astro dev\")",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(/Users/skit1z/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh *)",
+      "Bash(/Users/skit1z/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/stop-server.sh /Users/skit1z/WorkSpace/ClaudeProject/Zeal_Offical/.superpowers/brainstorm/20104-1777302527)"
     ]
   },
   "enabledPlugins": {
