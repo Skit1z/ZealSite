@@ -1,0 +1,112 @@
+---
+const navLinks = [
+  { label: "首页", href: "#hero" },
+  { label: "产品", href: "#products" },
+  { label: "特色", href: "#features" },
+  { label: "关于", href: "#footer" },
+];
+---
+
+<nav
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 bg-surface-white/80 backdrop-blur-md transition-shadow duration-300"
+>
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-2">
+      <span class="text-2xl font-bold text-brand-6 font-display">Zeal</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-sm font-medium text-text-dark/80 hover:text-text-dark transition-colors"
+          style="font-family: var(--font-body)"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="hidden md:block">
+      <a
+        href="#hero"
+        class="inline-flex items-center px-5 py-2.5 bg-text-charcoal text-white text-sm font-semibold rounded-lg hover:bg-text-charcoal/90 transition-colors"
+        style="font-family: var(--font-body)"
+      >
+        立即体验
+      </a>
+    </div>
+
+    <button
+      id="menu-toggle"
+      class="md:hidden p-2 text-text-dark"
+      aria-label="菜单"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden bg-surface-white border-t border-border-light"
+  >
+    <div class="px-6 py-4 flex flex-col gap-4">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-sm font-medium text-text-dark/80 hover:text-text-dark transition-colors mobile-link"
+          style="font-family: var(--font-body)"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="#hero"
+        class="inline-flex items-center justify-center px-5 py-2.5 bg-text-charcoal text-white text-sm font-semibold rounded-lg mobile-link"
+        style="font-family: var(--font-body)"
+      >
+        立即体验
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById("navbar");
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuIcon = document.getElementById("menu-icon");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+      navbar?.classList.add("shadow-[0_2px_8px_rgba(0,0,0,0.08)]");
+    } else {
+      navbar?.classList.remove("shadow-[0_2px_8px_rgba(0,0,0,0.08)]");
+    }
+  });
+
+  let menuOpen = false;
+  menuToggle?.addEventListener("click", () => {
+    menuOpen = !menuOpen;
+    mobileMenu?.classList.toggle("hidden");
+    if (menuIcon) {
+      menuIcon.setAttribute(
+        "d",
+        menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"
+      );
+    }
+  });
+
+  document.querySelectorAll(".mobile-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menuOpen = false;
+      mobileMenu?.classList.add("hidden");
+      if (menuIcon) {
+        menuIcon.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+      }
+    });
+  });
+</script>

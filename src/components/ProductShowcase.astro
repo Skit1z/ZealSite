@@ -1,0 +1,63 @@
+---
+import ProductCard from "./ProductCard.astro";
+
+const products = [
+  {
+    title: "OCR 智能识别",
+    description: "结合 OCR 与 Markdown 编辑，快速获取内容，让信息处理更高效",
+    gradient: "linear-gradient(135deg, #1456f0, #3daeff)",
+    icon: "📷",
+  },
+  {
+    title: "多轮问题拆解",
+    description: "交互式对话逐步明确需求，将复杂问题智能拆分为可执行的子任务",
+    gradient: "linear-gradient(135deg, #ea5ec1, #f472b6)",
+    icon: "🔄",
+  },
+  {
+    title: "模板引擎",
+    description: "智能匹配最优模板，生成结构清晰、AI 易读的高效提示词",
+    gradient: "linear-gradient(135deg, #8b5cf6, #a78bfa)",
+    icon: "📋",
+  },
+  {
+    title: "个性化记忆",
+    description: "基于用户画像的定制化优化，越用越懂你，准确率持续提升",
+    gradient: "linear-gradient(135deg, #f97316, #fb923c)",
+    icon: "🧠",
+  },
+  {
+    title: "模型推荐",
+    description: "系统智能推荐最适合的 AI 模型，一键直达最佳答案",
+    gradient: "linear-gradient(135deg, #10b981, #34d399)",
+    icon: "🎯",
+  },
+];
+---
+
+<section id="products" class="py-16 md:py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 md:mb-16 scroll-animate">
+      <h2
+        class="text-3xl md:text-[32px] font-semibold text-text-primary mb-4"
+        style="font-family: var(--font-display)"
+      >
+        核心能力
+      </h2>
+      <p
+        class="text-base text-text-secondary max-w-xl mx-auto"
+        style="font-family: var(--font-body)"
+      >
+        五大核心能力，全方位提升 AI 提示词质量与效率
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {products.map((product, i) => (
+        <div class="scroll-animate" style={`animation-delay: ${i * 0.1}s`}>
+          <ProductCard {...product} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
