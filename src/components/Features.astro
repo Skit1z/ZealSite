@@ -5,46 +5,41 @@ const features = [
   {
     title: "精准定位",
     description: "新用户注册即进行个性化分析，将用户身份与平台绑定，生成内容更贴合用户需求",
-    icon: "🎯",
+    iconName: "precision",
   },
   {
     title: "跨平台兼容",
     description: "生成的提示词可直接复制到其他 AI 平台使用，也可在本平台选择最优模型直接提问",
-    icon: "🔄",
+    iconName: "crossplatform",
   },
   {
     title: "自主微调",
     description: "基于开源模型的自主微调优化，结合用户个性化记忆，显著提升解决问题的准确率",
-    icon: "🧠",
+    iconName: "tuning",
   },
   {
     title: "持续进化",
     description: "未来将结合头脑风暴、人格测试等，开放社区模块，注重 UGC 和 PGC 开发",
-    icon: "🚀",
+    iconName: "rocket",
   },
 ];
 ---
 
-<section id="features" class="py-16 md:py-24 px-6 bg-surface-light/30">
+<section id="features" class="py-20 md:py-28 px-6">
   <div class="max-w-6xl mx-auto">
-    <div class="text-center mb-12 md:mb-16 scroll-animate">
+    <div class="text-center mb-14 md:mb-20 scroll-animate">
+      <span class="inline-block text-xs font-semibold text-brand-6 tracking-widest uppercase mb-3" style="font-family: var(--font-body)">Why Zeal</span>
       <h2
-        class="text-3xl md:text-[32px] font-semibold text-text-primary mb-4"
+        class="text-3xl md:text-[40px] font-semibold text-text-primary tracking-tight"
         style="font-family: var(--font-display)"
       >
         为什么选择 Zeal
       </h2>
-      <p
-        class="text-base text-text-secondary max-w-xl mx-auto"
-        style="font-family: var(--font-body)"
-      >
-        不只是提示词工具，更是你的 AI 效率伙伴
-      </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       {features.map((feature, i) => (
-        <div class="scroll-animate" style={`animation-delay: ${i * 0.1}s`}>
+        <div class="scroll-animate" style={`animation-delay: ${i * 0.08}s`}>
           <FeatureCard {...feature} />
         </div>
       ))}

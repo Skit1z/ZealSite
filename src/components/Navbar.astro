@@ -1,26 +1,32 @@
 ---
+import Icon from "./Icon.astro";
+
 const navLinks = [
   { label: "首页", href: "#hero" },
   { label: "产品", href: "#products" },
   { label: "特色", href: "#features" },
-  { label: "关于", href: "#footer" },
 ];
 ---
 
 <nav
   id="navbar"
-  class="fixed top-0 left-0 right-0 z-50 bg-surface-white/80 backdrop-blur-md transition-shadow duration-300"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
 >
-  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="#hero" class="flex items-center gap-2">
-      <span class="text-2xl font-bold text-brand-6 font-display">Zeal</span>
+  <div class="absolute inset-0 bg-white/70 backdrop-blur-xl border-b border-transparent transition-all duration-300" id="nav-bg"></div>
+  <div class="relative max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-2.5 group">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="28" height="28" rx="7" fill="#1456f0"/>
+        <path d="M8 20V8h3.5l3.5 8 3.5-8H22v12h-2.5v-7.5L16 20h-2l-3.5-7.5V20H8z" fill="white"/>
+      </svg>
+      <span class="text-xl font-semibold text-text-charcoal tracking-tight" style="font-family: var(--font-display)">Zeal</span>
     </a>
 
-    <div class="hidden md:flex items-center gap-8">
+    <div class="hidden md:flex items-center gap-1">
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="text-sm font-medium text-text-dark/80 hover:text-text-dark transition-colors"
+          class="px-4 py-2 text-sm font-medium text-text-secondary hover:text-text-primary rounded-full hover:bg-black/[0.04] transition-all"
           style="font-family: var(--font-body)"
         >
           {link.label}
@@ -30,42 +36,41 @@ const navLinks = [
 
     <div class="hidden md:block">
       <a
-        href="#hero"
-        class="inline-flex items-center px-5 py-2.5 bg-text-charcoal text-white text-sm font-semibold rounded-lg hover:bg-text-charcoal/90 transition-colors"
+        href="#products"
+        class="inline-flex items-center gap-2 px-5 py-2 bg-text-charcoal text-white text-sm font-semibold rounded-full hover:bg-text-charcoal/85 transition-all active:scale-[0.97]"
         style="font-family: var(--font-body)"
       >
         立即体验
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
 
     <button
       id="menu-toggle"
-      class="md:hidden p-2 text-text-dark"
+      class="md:hidden p-2 -mr-2 text-text-dark rounded-lg hover:bg-black/[0.04] transition-colors"
       aria-label="菜单"
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
+      <Icon name="menu" size={22} />
     </button>
   </div>
 
   <div
     id="mobile-menu"
-    class="md:hidden hidden bg-surface-white border-t border-border-light"
+    class="md:hidden hidden relative bg-white/95 backdrop-blur-xl border-t border-border-light"
   >
-    <div class="px-6 py-4 flex flex-col gap-4">
+    <div class="px-6 py-5 flex flex-col gap-1">
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="text-sm font-medium text-text-dark/80 hover:text-text-dark transition-colors mobile-link"
+          class="px-4 py-2.5 text-sm font-medium text-text-secondary hover:text-text-primary rounded-xl hover:bg-black/[0.04] transition-all mobile-link"
           style="font-family: var(--font-body)"
         >
           {link.label}
         </a>
       ))}
       <a
-        href="#hero"
-        class="inline-flex items-center justify-center px-5 py-2.5 bg-text-charcoal text-white text-sm font-semibold rounded-lg mobile-link"
+        href="#products"
+        class="mt-2 inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-text-charcoal text-white text-sm font-semibold rounded-full mobile-link"
         style="font-family: var(--font-body)"
       >
         立即体验
@@ -76,15 +81,17 @@ const navLinks = [
 
 <script>
   const navbar = document.getElementById("navbar");
+  const navBg = document.getElementById("nav-bg");
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
-  const menuIcon = document.getElementById("menu-icon");
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 10) {
-      navbar?.classList.add("shadow-[0_2px_8px_rgba(0,0,0,0.08)]");
+      navBg?.classList.add("border-border-light", "shadow-[0_1px_3px_rgba(0,0,0,0.05)]");
+      navBg?.classList.remove("border-transparent");
     } else {
-      navbar?.classList.remove("shadow-[0_2px_8px_rgba(0,0,0,0.08)]");
+      navBg?.classList.remove("border-border-light", "shadow-[0_1px_3px_rgba(0,0,0,0.05)]");
+      navBg?.classList.add("border-transparent");
     }
   });
 
@@ -92,21 +99,12 @@ const navLinks = [
   menuToggle?.addEventListener("click", () => {
     menuOpen = !menuOpen;
     mobileMenu?.classList.toggle("hidden");
-    if (menuIcon) {
-      menuIcon.setAttribute(
-        "d",
-        menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"
-      );
-    }
   });
 
   document.querySelectorAll(".mobile-link").forEach((link) => {
     link.addEventListener("click", () => {
       menuOpen = false;
       mobileMenu?.classList.add("hidden");
-      if (menuIcon) {
-        menuIcon.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
-      }
     });
   });
 </script>

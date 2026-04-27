@@ -2,35 +2,67 @@
 
 ---
 
-<section id="hero" class="pt-32 pb-20 md:pt-44 md:pb-32 px-6">
-  <div class="max-w-4xl mx-auto text-center">
+<section id="hero" class="relative pt-28 pb-12 md:pt-40 md:pb-20 px-6 overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-blue-50/40 via-transparent to-transparent pointer-events-none"></div>
+  <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary-500/[0.04] rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative max-w-4xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-6/[0.06] border border-brand-6/10 mb-8 scroll-animate">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1456f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      <span class="text-xs font-medium text-brand-6 tracking-wide" style="font-family: var(--font-body)">提示词工程平台</span>
+    </div>
+
     <h1
-      class="text-5xl md:text-[80px] font-medium leading-[1.10] text-text-primary mb-6"
-      style="font-family: var(--font-display)"
+      class="text-[2.75rem] md:text-[80px] font-medium leading-[1.08] text-text-primary mb-6 tracking-tight scroll-animate"
+      style="font-family: var(--font-display); animation-delay: 0.08s"
     >
-      驾驭 AI，<br />从精准提示词开始
+      驾驭 AI，<br class="hidden md:block" />从精准提示词开始
     </h1>
     <p
-      class="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10"
-      style="font-family: var(--font-body)"
+      class="text-base md:text-xl text-text-secondary max-w-2xl mx-auto mb-10 leading-[1.7] scroll-animate"
+      style="font-family: var(--font-body); animation-delay: 0.16s"
     >
-      Zeal 是面向新一代 AI 大模型的提示词工程平台，将复杂问题逐步拆解，生成 AI 易读的高效提示词。
+      Zeal 是面向新一代 AI 大模型的提示词工程平台，<br class="hidden md:block" />将复杂问题逐步拆解，生成 AI 易读的高效提示词。
     </p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 scroll-animate" style="animation-delay: 0.24s">
       <a
         href="#products"
-        class="inline-flex items-center px-8 py-3 bg-text-charcoal text-white font-semibold rounded-full hover:bg-text-charcoal/90 transition-all hover:shadow-[0_12px_16px_-4px_rgba(36,36,36,0.08)]"
+        class="group inline-flex items-center gap-2 px-7 py-3 bg-text-charcoal text-white text-sm font-semibold rounded-full hover:bg-text-charcoal/85 transition-all active:scale-[0.97]"
         style="font-family: var(--font-body)"
       >
         开始体验
+        <svg class="transition-transform group-hover:translate-x-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
       <a
         href="#features"
-        class="inline-flex items-center px-8 py-3 bg-surface-light text-[#333333] font-semibold rounded-lg hover:bg-surface-light/80 transition-colors"
+        class="inline-flex items-center gap-2 px-7 py-3 bg-white text-text-charcoal text-sm font-semibold rounded-full border border-border-gray hover:border-text-charcoal/30 hover:shadow-sm transition-all"
         style="font-family: var(--font-body)"
       >
         了解更多
       </a>
+    </div>
+  </div>
+
+  <!-- App screenshots showcase -->
+  <div class="relative max-w-5xl mx-auto mt-16 md:mt-24 scroll-animate" style="animation-delay: 0.35s">
+    <div class="flex justify-center gap-3 md:gap-5 items-end">
+      <div class="hidden lg:block w-[180px] flex-shrink-0 transform rotate-[-6deg] translate-y-4 opacity-60">
+        <img src="/images/screenshots/screen6.png" alt="Zeal App" class="w-full rounded-2xl shadow-lg" loading="lazy" />
+      </div>
+      <div class="hidden md:block w-[200px] flex-shrink-0 transform rotate-[-3deg] translate-y-2 opacity-80">
+        <img src="/images/screenshots/screen2.png" alt="Zeal App" class="w-full rounded-2xl shadow-lg" loading="lazy" />
+      </div>
+      <div class="w-[220px] md:w-[260px] flex-shrink-0 relative z-10">
+        <div class="absolute -inset-4 bg-gradient-to-b from-brand-6/10 to-transparent rounded-3xl blur-2xl"></div>
+        <img src="/images/screenshots/screen3.png" alt="Zeal App" class="relative w-full rounded-2xl shadow-card-elevation" style="box-shadow: var(--shadow-card-elevation)" />
+      </div>
+      <div class="hidden md:block w-[200px] flex-shrink-0 transform rotate-[3deg] translate-y-2 opacity-80">
+        <img src="/images/screenshots/screen4.png" alt="Zeal App" class="w-full rounded-2xl shadow-lg" loading="lazy" />
+      </div>
+      <div class="hidden lg:block w-[180px] flex-shrink-0 transform rotate-[6deg] translate-y-4 opacity-60">
+        <img src="/images/screenshots/screen5.png" alt="Zeal App" class="w-full rounded-2xl shadow-lg" loading="lazy" />
+      </div>
     </div>
   </div>
 </section>
