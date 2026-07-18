@@ -1,56 +1,104 @@
 ---
-import ProductCard from "./ProductCard.astro";
-
-const products = [
+const capabilities = [
   {
     title: "OCR 智能识别",
     description: "结合 OCR 与 Markdown 编辑，快速获取内容，让信息处理更高效",
-    gradient: "linear-gradient(135deg, #1456f0, #3daeff)",
-    iconName: "ocr",
+    screenshot: "/images/screenshots/screen1.png",
+    accent: "#1456f0",
   },
   {
     title: "多轮问题拆解",
     description: "交互式对话逐步明确需求，将复杂问题智能拆分为可执行的子任务",
-    gradient: "linear-gradient(135deg, #ea5ec1, #f472b6)",
-    iconName: "layers",
+    screenshot: "/images/screenshots/screen2.png",
+    accent: "#ea5ec1",
   },
   {
     title: "模板引擎",
     description: "智能匹配最优模板，生成结构清晰、AI 易读的高效提示词",
-    gradient: "linear-gradient(135deg, #8b5cf6, #a78bfa)",
-    iconName: "template",
+    screenshot: "/images/screenshots/screen4.png",
+    accent: "#8b5cf6",
   },
   {
     title: "个性化记忆",
     description: "基于用户画像的定制化优化，越用越懂你，准确率持续提升",
-    gradient: "linear-gradient(135deg, #f97316, #fb923c)",
-    iconName: "memory",
+    screenshot: "/images/screenshots/screen5.png",
+    accent: "#f97316",
   },
   {
     title: "模型推荐",
     description: "系统智能推荐最适合的 AI 模型，一键直达最佳答案",
-    gradient: "linear-gradient(135deg, #10b981, #34d399)",
-    iconName: "target",
+    screenshot: "/images/screenshots/screen6.png",
+    accent: "#10b981",
   },
 ];
 ---
 
-<section id="products" class="py-20 md:py-28 px-6">
+<section id="products" class="py-24 md:py-36 px-6">
   <div class="max-w-6xl mx-auto">
-    <div class="text-center mb-14 md:mb-20 scroll-animate">
-      <span class="inline-block text-xs font-semibold text-brand-6 tracking-widest uppercase mb-3" style="font-family: var(--font-body)">Core Capabilities</span>
+    <!-- Section header -->
+    <div class="text-center mb-16 md:mb-24 scroll-animate">
+      <span class="inline-block text-xs font-semibold text-brand-6 tracking-widest uppercase mb-4" style="font-family: var(--font-body)">Core Capabilities</span>
       <h2
-        class="text-3xl md:text-[40px] font-semibold text-text-primary tracking-tight"
+        class="text-3xl md:text-[48px] font-semibold text-text-primary tracking-tight"
         style="font-family: var(--font-display)"
       >
         核心能力
       </h2>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-      {products.map((product, i) => (
-        <div class={`scroll-animate ${i >= 3 ? 'sm:col-span-1 lg:col-span-1' : ''}`} style={`animation-delay: ${i * 0.08}s`}>
-          <ProductCard {...product} />
+    <!-- Featured card: OCR -->
+    <div class="mb-8 scroll-animate">
+      <div class="cap-card group relative rounded-3xl overflow-hidden bg-white transition-all duration-500 hover:-translate-y-1" style="border: 1px solid var(--color-border-light); box-shadow: none" onmouseenter="this.style.boxShadow='var(--shadow-card-elevation)'" onmouseleave="this.style.boxShadow='none'">
+        <div class="flex flex-col md:flex-row items-center">
+          <!-- Phone mockup -->
+          <div class="relative w-full md:w-[48%] py-10 md:py-14 flex justify-center">
+            <div class="relative w-[160px] md:w-[190px] rounded-[1.6rem] p-[6px] bg-white transition-transform duration-700 group-hover:scale-[1.02]" style={`box-shadow: 0 20px 48px -10px ${capabilities[0].accent}20, 0 8px 16px -4px rgba(0,0,0,0.05)`}>
+              <div class="rounded-[1.3rem] overflow-hidden bg-surface-light">
+                <img src={capabilities[0].screenshot} alt={capabilities[0].title} class="w-full h-auto block" loading="lazy" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="w-full md:w-[52%] px-8 md:px-12 lg:px-16 pb-8 md:py-14">
+            <span class="inline-block text-[11px] font-semibold tracking-[0.2em] uppercase mb-5" style={`color: ${capabilities[0].accent}; opacity: 0.35; font-family: var(--font-body)`}>01</span>
+            <h3 class="text-2xl md:text-[32px] font-semibold text-text-primary tracking-tight leading-[1.2] mb-4" style="font-family: var(--font-display)">
+              {capabilities[0].title}
+            </h3>
+            <p class="text-sm md:text-base text-text-secondary leading-[1.8]" style="font-family: var(--font-body)">
+              {capabilities[0].description}
+            </p>
+            <div class="mt-8 w-10 h-[2px] rounded-full" style={`background: ${capabilities[0].accent}; opacity: 0.25`}></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {capabilities.slice(1).map((cap, i) => (
+        <div class="scroll-animate" style={`animation-delay: ${(i + 1) * 0.1}s`}>
+          <div class="cap-card group relative rounded-2xl overflow-hidden bg-white transition-all duration-500 hover:-translate-y-1 h-full" style="border: 1px solid var(--color-border-light); box-shadow: none" onmouseenter="this.style.boxShadow='var(--shadow-card-elevation)'" onmouseleave="this.style.boxShadow='none'">
+            <!-- Phone mockup -->
+            <div class="relative pt-8 pb-4 flex justify-center">
+              <div class="relative w-[110px] rounded-[1.2rem] p-[5px] bg-white transition-transform duration-700 group-hover:scale-[1.03]" style={`box-shadow: 0 14px 36px -8px ${cap.accent}16, 0 6px 12px -3px rgba(0,0,0,0.04)`}>
+                <div class="rounded-[0.9rem] overflow-hidden bg-surface-light">
+                  <img src={cap.screenshot} alt={cap.title} class="w-full h-auto block" loading="lazy" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Text -->
+            <div class="px-6 md:px-8 pb-6 md:pb-8 text-center">
+              <span class="inline-block text-[11px] font-semibold tracking-[0.2em] uppercase mb-3" style={`color: ${cap.accent}; opacity: 0.35; font-family: var(--font-body)`}>{String(i + 2).padStart(2, '0')}</span>
+              <h3 class="text-lg md:text-xl font-semibold text-text-primary tracking-tight leading-[1.3] mb-2" style="font-family: var(--font-display)">
+                {cap.title}
+              </h3>
+              <p class="text-sm text-text-secondary leading-[1.7]" style="font-family: var(--font-body)">
+                {cap.description}
+              </p>
+            </div>
+          </div>
         </div>
       ))}
     </div>
