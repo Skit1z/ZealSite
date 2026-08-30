@@ -1,33 +1,34 @@
 ---
 const capabilities = [
   {
-    title: "分阶段问题求解",
-    description: "问题理解、推导思路、完整求解，一屏一阶段，层层推进",
-    screenshot: "/images/screenshots/screen5.png",
-    accent: "#ea5ec1",
-  },
-  {
     title: "OCR 识别与编辑",
     description: "拍照或导入文件，识别为可编辑内容，公式排版原样保留",
     screenshot: "/images/screenshots/screen2.png",
     accent: "#1456f0",
   },
   {
+    title: "分阶段问题求解",
+    description: "问题理解、推导思路、完整求解，一屏一阶段，层层推进",
+    screenshot: "/images/screenshots/screen5.png",
+    accent: "#ea5ec1",
+  },
+  {
+    title: "双模式学习",
+    description: "「快速」直击答案不绕弯，「专注」一步一台阶走稳——赶时间还是想学透，节奏你说了算",
+    screenshot: "/images/screenshots/screen9.png",
+    video: "/videos/modes.mp4",
+    accent: "#8b5cf6",
+  },
+  {
     title: "AI 追问",
     description: "答完还能继续问，快捷质疑直击卡点，直到真正弄懂",
     screenshot: "/images/screenshots/screen7.png",
-    accent: "#8b5cf6",
+    accent: "#f97316",
   },
   {
     title: "引导练习",
     description: "互动选择题检验掌握程度，边答边学，答对才算学会",
     screenshot: "/images/screenshots/screen6.png",
-    accent: "#f97316",
-  },
-  {
-    title: "双模式学习",
-    description: "「快速」直击答案不绕弯，「专注」一步一台阶走稳——赶时间还是想学透，节奏你说了算",
-    screenshot: "/images/screenshots/screen1.png",
     accent: "#10b981",
   },
 ];
@@ -83,7 +84,18 @@ const capabilities = [
             <div class="relative pt-8 pb-4 flex justify-center">
               <div class="relative w-[110px] rounded-[1.2rem] p-[5px] bg-white transition-transform duration-700 group-hover:scale-[1.03]" style={`box-shadow: 0 14px 36px -8px ${cap.accent}16, 0 6px 12px -3px rgba(0,0,0,0.04)`}>
                 <div class="rounded-[0.9rem] overflow-hidden bg-surface-light">
-                  <img src={cap.screenshot} alt={cap.title} class="w-full h-auto block" loading="lazy" />
+                  {cap.video ? (
+                    <video
+                      src={cap.video}
+                      poster={cap.screenshot}
+                      muted
+                      playsinline
+                      preload="metadata"
+                      class="modes-video w-full h-auto block"
+                    ></video>
+                  ) : (
+                    <img src={cap.screenshot} alt={cap.title} class="w-full h-auto block" loading="lazy" />
+                  )}
                 </div>
               </div>
             </div>
@@ -104,3 +116,26 @@ const capabilities = [
     </div>
   </div>
 </section>
+
+<script>
+  function initModesVideos() {
+    const videos = document.querySelectorAll(".modes-video");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            if (video.ended) video.currentTime = 0;
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.35 }
+    );
+    videos.forEach((v) => observer.observe(v));
+  }
+  initModesVideos();
+  document.addEventListener("astro:after-swap", initModesVideos);
+</script>
