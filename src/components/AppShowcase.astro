@@ -1,39 +1,40 @@
 ---
 const items = [
   {
-    src: "/images/screenshots/screen1.png",
-    title: "OCR 智能识别",
-    subtitle: "拍照即解析，图片中的文字瞬间转化为可编辑的 Markdown 内容",
+    src: "/images/screenshots/screen8.png",
+    video: "/videos/demo.mp4",
+    title: "拍照搜题",
+    subtitle: "打开就是首页：拍照、相册、文件随手导入；快速、专注两种模式，一键切换",
     accent: "#1456f0",
   },
   {
-    src: "/images/screenshots/screen3.png",
-    title: "对话交互",
-    subtitle: "通过多轮对话精准理解你的真实需求，告别模糊提问",
+    src: "/images/screenshots/screen2.png",
+    title: "OCR 识别与编辑",
+    subtitle: "识别结果可实时编辑，公式排版原样保留，改完即刻重新理解",
     accent: "#ea5ec1",
   },
   {
-    src: "/images/screenshots/screen2.png",
-    title: "智能拆解",
-    subtitle: "复杂问题逐层分解，让每一步都清晰可控",
+    src: "/images/screenshots/screen4.png",
+    title: "问题理解",
+    subtitle: "先弄清题目在问什么，前提与作答限制逐条列清，再开始求解",
     accent: "#8b5cf6",
   },
   {
-    src: "/images/screenshots/screen4.png",
-    title: "模板匹配",
-    subtitle: "海量场景模板智能推荐，生成结构清晰的优质提示词",
+    src: "/images/screenshots/screen5.png",
+    title: "逐步学习",
+    subtitle: "一次只学一步，理解之后再继续，节奏跟着你走",
     accent: "#3daeff",
   },
   {
-    src: "/images/screenshots/screen5.png",
-    title: "个性化优化",
-    subtitle: "基于你的使用习惯持续学习，越用越懂你",
+    src: "/images/screenshots/screen6.png",
+    title: "引导练习",
+    subtitle: "快速模式下边答边学，随时快捷质疑，卡点当场讲清",
     accent: "#f97316",
   },
   {
     src: "/images/screenshots/screen7.png",
-    title: "模型推荐",
-    subtitle: "系统为你匹配最适合的 AI 模型，一键直达最佳答案",
+    title: "AI 追问",
+    subtitle: "开始前先问你在卡哪，讲解更对症，答完还能继续问",
     accent: "#10b981",
   },
 ];
@@ -51,7 +52,7 @@ const items = [
         探索 Zeal
       </h2>
       <p class="text-base md:text-lg text-text-secondary max-w-md mx-auto leading-[1.7]" style="font-family: var(--font-body)">
-        从识别到生成，每一步都精心设计
+        从拍照到学会，每一步都讲明白
       </p>
     </div>
   </div>
@@ -80,12 +81,26 @@ const items = [
               {/* Phone frame */}
               <div class="relative w-[260px] md:w-[300px] rounded-[2.5rem] p-2 bg-white/95 backdrop-blur-sm" style={`box-shadow: 0 25px 60px -12px ${item.accent}20, 0 12px 28px -8px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03)`}>
                 <div class="relative rounded-[2rem] overflow-hidden bg-surface-light">
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    class="w-full h-auto block"
-                    loading="lazy"
-                  />
+                  {item.video ? (
+                    <div class="relative showcase-video-wrap">
+                      <video
+                        src={item.video}
+                        poster="/images/screenshots/video-poster-home.jpg"
+                        muted
+                        loop
+                        playsinline
+                        preload="auto"
+                        class="w-full h-auto block"
+                      ></video>
+                    </div>
+                  ) : (
+                    <img
+                      src={item.src}
+                      alt={item.title}
+                      class="w-full h-auto block"
+                      loading="lazy"
+                    />
+                  )}
                   <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white/5 to-transparent pointer-events-none"></div>
                 </div>
               </div>
@@ -198,4 +213,23 @@ const items = [
 
   initShowcase();
   document.addEventListener("astro:after-swap", initShowcase);
+
+  function initVideoAutoPlay() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    document.querySelectorAll(".showcase-video-wrap video").forEach((video) => observer.observe(video));
+  }
+  initVideoAutoPlay();
+  document.addEventListener("astro:after-swap", initVideoAutoPlay);
 </script>
